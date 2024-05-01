@@ -72,9 +72,9 @@ Maaslin2 function execution makes a big output in R console, describing once mor
 ```{r, message="false", warning="false"}
 fit_data <- Maaslin2(
   bacteria, metadata, './../output/output_Gender',
-  transform = "LOG", normalization= "NONE", 
-  max_significance=0.25, min_abundance=0.000001, 
-  min_prevalence=0.4, 
+  transform = "LOG", normalization= "NONE",    # specify whether you transform and normalize data
+  max_significance=0.25, min_abundance=0.000001, # specify q-value threshold and 
+  min_prevalence=0.4,                        # what are the cut-offs for including zero/low taxa
   fixed_effects = c('Gender'),
   reference = c("Gender","Female"),
   standardize = FALSE)
@@ -116,7 +116,7 @@ fit_data <- Maaslin2(
   transform = "LOG", normalization= "NONE",
   max_significance=0.25, min_abundance=0.000001, 
   min_prevalence=0.4, 
-  fixed_effects = c('Gender', 'Age', 'BMI'),
+  fixed_effects = c('Gender', 'Age', 'BMI'),# here you add your multiple parameters as fixed eff.
   reference = c("Gender","Female"),
   standardize = FALSE)
 ```
