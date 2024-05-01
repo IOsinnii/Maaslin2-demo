@@ -1,0 +1,57 @@
+2024-05-01 15:54:09.258892 INFO::Writing function arguments to log file
+2024-05-01 15:54:09.25988 DEBUG::Function arguments
+2024-05-01 15:54:09.260117 DEBUG::Output folder: ./../output/output_Gender_Age
+2024-05-01 15:54:09.260333 DEBUG::Min Abundance: 0.000001
+2024-05-01 15:54:09.260556 DEBUG::Min Prevalence: 0.400000
+2024-05-01 15:54:09.260759 DEBUG::Normalization: NONE
+2024-05-01 15:54:09.260956 DEBUG::Transform: LOG
+2024-05-01 15:54:09.261153 DEBUG::Analysis method: LM
+2024-05-01 15:54:09.261356 DEBUG::Max significance: 0.250000
+2024-05-01 15:54:09.261555 DEBUG::Random effects:
+2024-05-01 15:54:09.261745 DEBUG::Fixed effects: Gender,Age
+2024-05-01 15:54:09.261916 DEBUG::Correction method: BH
+2024-05-01 15:54:09.262087 DEBUG::Standardize: FALSE
+2024-05-01 15:54:09.26233 DEBUG::Cores: 1
+2024-05-01 15:54:09.2626 INFO::Verifying options selected are valid
+2024-05-01 15:54:09.263366 INFO::Determining format of input files
+2024-05-01 15:54:09.264182 INFO::Input format is data samples as rows and metadata samples as rows
+2024-05-01 15:54:09.26529 DEBUG::A total of 50 samples were found in both the data and metadata
+2024-05-01 15:54:09.265481 DEBUG::Reordering data/metadata to use same sample ordering
+2024-05-01 15:54:09.266107 INFO::Formula for fixed effects: expr ~  Gender + Age
+2024-05-01 15:54:09.266923 INFO::Filter data based on min abundance and min prevalence
+2024-05-01 15:54:09.267431 INFO::Total samples in data: 50
+2024-05-01 15:54:09.267882 INFO::Min samples required with min abundance for a feature not to be filtered: 20.000000
+2024-05-01 15:54:09.268777 INFO::Total filtered features: 37
+2024-05-01 15:54:09.269271 INFO::Filtered feature names from abundance and prevalence filtering: d__Archaea.p__Euryarchaeota, d__Bacteria.p__Acidobacteriota, d__Bacteria.p__Armatimonadota, d__Bacteria.p__Bdellovibrionota, d__Bacteria.p__Campilobacterota, d__Bacteria.p__Cyanobacteria, d__Bacteria.p__Deferribacterota, d__Bacteria.p__Deinococcota, d__Bacteria.p__Elusimicrobiota, d__Bacteria.p__Fusobacteriota, d__Bacteria.p__Gemmatimonadota, d__Bacteria.p__Myxococcota, d__Bacteria.p__Patescibacteria, d__Bacteria.p__Planctomycetota, d__Bacteria.p__Spirochaetota, d__Bacteria.p__Synergistota, d__Archaea.p__Euryarchaeota.c__Methanobacteria.o__Methanobacteriales.f__Methanobacteriaceae, d__Bacteria.p__Acidobacteriota.c__Acidobacteriae.o__Acidobacteriales.f__Acidobacteriaceae_.Subgroup_1., d__Bacteria.p__Acidobacteriota.c__Acidobacteriae.o__Bryobacterales.f__Bryobacteraceae, d__Bacteria.p__Acidobacteriota.c__Blastocatellia.o__Blastocatellales.f__Blastocatellaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Actinomycetales.f__Actinomycetaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Bifidobacteriales.f__Bifidobacteriaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Corynebacteriales.f__Corynebacteriaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Corynebacteriales.f__Nocardiaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Frankiales.f__Nakamurellaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Micrococcales.f__Brevibacteriaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Micrococcales.f__Cellulomonadaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Micrococcales.f__Intrasporangiaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Micrococcales.f__Microbacteriaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Micrococcales.f__Micrococcaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Propionibacteriales.f__Propionibacteriaceae, d__Bacteria.p__Actinobacteriota.c__Coriobacteriia.o__Coriobacteriales.f__Atopobiaceae, d__Bacteria.p__Actinobacteriota.c__Coriobacteriia.o__Coriobacteriales.f__Eggerthellaceae, d__Bacteria.p__Armatimonadota.c__Fimbriimonadia.o__Fimbriimonadales.f__Fimbriimonadaceae, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Dysgonomonadaceae, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Paludibacteraceae, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Porphyromonadaceae
+2024-05-01 15:54:09.270071 INFO::Total filtered features with variance filtering: 0
+2024-05-01 15:54:09.270567 INFO::Filtered feature names from variance filtering:
+2024-05-01 15:54:09.271007 INFO::Running selected normalization method: NONE
+2024-05-01 15:54:09.271433 INFO::Bypass z-score application to metadata
+2024-05-01 15:54:09.27186 INFO::Running selected transform method: LOG
+2024-05-01 15:54:09.272497 INFO::Running selected analysis method: LM
+2024-05-01 15:54:09.273384 INFO::Fitting model to feature number 1, d__Bacteria.p__Actinobacteriota
+2024-05-01 15:54:09.275474 INFO::Fitting model to feature number 2, d__Bacteria.p__Bacteroidota
+2024-05-01 15:54:09.277108 INFO::Fitting model to feature number 3, d__Bacteria.p__Desulfobacterota
+2024-05-01 15:54:09.278698 INFO::Fitting model to feature number 4, d__Bacteria.p__Firmicutes
+2024-05-01 15:54:09.280135 INFO::Fitting model to feature number 5, d__Bacteria.p__Proteobacteria
+2024-05-01 15:54:09.281534 INFO::Fitting model to feature number 6, d__Bacteria.p__Verrucomicrobiota
+2024-05-01 15:54:09.282967 INFO::Fitting model to feature number 7, d__Bacteria.p__Actinobacteriota.c__Coriobacteriia.o__Coriobacteriales.f__Coriobacteriaceae
+2024-05-01 15:54:09.284359 INFO::Fitting model to feature number 8, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Bacteroidaceae
+2024-05-01 15:54:09.285697 INFO::Fitting model to feature number 9, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Barnesiellaceae
+2024-05-01 15:54:09.287015 INFO::Fitting model to feature number 10, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Marinifilaceae
+2024-05-01 15:54:09.288326 INFO::Fitting model to feature number 11, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Muribaculaceae
+2024-05-01 15:54:09.289618 INFO::Fitting model to feature number 12, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Prevotellaceae
+2024-05-01 15:54:09.290923 INFO::Fitting model to feature number 13, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Rikenellaceae
+2024-05-01 15:54:09.294152 INFO::Counting total values for each feature
+2024-05-01 15:54:09.295287 INFO::Writing filtered data to file ./../output/output_Gender_Age/features/filtered_data.tsv
+2024-05-01 15:54:09.296362 INFO::Writing filtered, normalized data to file ./../output/output_Gender_Age/features/filtered_data_norm.tsv
+2024-05-01 15:54:09.297289 INFO::Writing filtered, normalized, transformed data to file ./../output/output_Gender_Age/features/filtered_data_norm_transformed.tsv
+2024-05-01 15:54:09.298344 INFO::Writing residuals to file ./../output/output_Gender_Age/fits/residuals.rds
+2024-05-01 15:54:09.299 INFO::Writing fitted values to file ./../output/output_Gender_Age/fits/fitted.rds
+2024-05-01 15:54:09.299578 INFO::Writing all results to file (ordered by increasing q-values): ./../output/output_Gender_Age/all_results.tsv
+2024-05-01 15:54:09.300291 INFO::Writing the significant results (those which are less than or equal to the threshold of 0.250000 ) to file (ordered by increasing q-values): ./../output/output_Gender_Age/significant_results.tsv
+2024-05-01 15:54:09.300784 INFO::Writing heatmap of significant results to file: ./../output/output_Gender_Age/heatmap.pdf
+2024-05-01 15:54:09.301519 INFO::Writing association plots (one for each significant association) to output folder: ./../output/output_Gender_Age
+2024-05-01 15:54:09.302252 INFO::Plotting associations from most to least significant, grouped by metadata
+2024-05-01 15:54:09.302659 INFO::Plotting data for metadata number 1, Gender
+2024-05-01 15:54:09.303358 INFO::Creating boxplot for categorical data, Gender vs d__Bacteria.p__Bacteroidota

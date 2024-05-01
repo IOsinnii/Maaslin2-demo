@@ -1,0 +1,104 @@
+---
+title: "Maaslin2 demo analysis"
+subtitle: "Metagenomics analyses 1" 
+title-block-banner: "#f0f3f5"
+title-block-banner-color: "black"
+author: "Ivan Osinnii"
+date: "29 April 2024"
+format: html
+code-fold: true
+editor: visual
+toc: true
+toc-location: left
+number-sections: true
+fig-cap-location: margin
+css: style.css
+---
+
+# Introduction
+
+![MaAsLin2 logo from package developers website](./../assets/Maaslin.png)
+
+Maaslin2 package can be used in order to automatize linear regression analysis from metagenomics data (typically 16S rRNA gene sequencing data) and most importantly include multivariate analyses in convenient manner getting very appealing graphic results as an output. For more information please visit Maaslin2 tutorial [website](https://github.com/biobakery/biobakery/wiki/maaslin2).
+
+# Loading data and dependencies
+
+In this analysis we need *tidyverse*, *png*, *grid* and *Maaslin2* packages.
+
+```{r, message=F, warning=F}
+library(tidyverse)
+library(Maaslin2)
+library(png)
+library(grid)
+```
+
+Typically one needs to input files: separate microorganism abundance table (feature counts) and metadata indicating all factors describing our samples and their values. In this case we have simulated mock data (made to yield some easy-to-interpret results).
+
+```{r}
+bacteria <- read.table("./../input/input_bacteria.csv", header = T, sep = ",", row.names="sample")
+metadata <- read.table("./../input/input_metadata.csv", header = T, sep = ",", row.names="sample")
+```
+
+# Running Maaslin2 analyses
+
+## Single variable analysis of the role of the Gender
+
+Maaslin2 function execution makes a big output in R console, describing once more parameters of the model and very detailed calculations. You don't need to look at this output unless something unexpected happen like an error. You might want to look at the last row to understand whether there were significant findings found.
+
+```{r, message="false", warning="false"}
+fit_data <- Maaslin2(
+  bacteria, metadata, './../output/output_Gender',
+  transform = "LOG", normalization= "NONE", 
+  max_significance=0.25, min_abundance=0.000001, 
+  min_prevalence=0.4, 
+  fixed_effects = c('Gender'),
+  reference = c("Gender","Female"),
+  standardize = FALSE)
+```
+
+You can see how Maaslin2 algorithm is fitting the model to each individual taxa represented in rows.
+
+### Visualizing results
+
+After the output one usually goes into ouput folder to check results in excell and pdf formats. Tables contain very detailed statistics and all result ranking whereas pdf figures like the box plot below, focus on single significant hits among microbial taxa
+
+```{r}
+# Set the path to your png file
+image_path <- './../output/output_Gender/Gender.png'
+# Read the PNG image
+img <- readPNG(image_path)
+# Use plot to display the image
+plot(as.raster(img))
+```
+
+We can see here that Bacrterioidota phylum turned out to be very reduced in Male group compared to Female
+
+## Multivariate analysis of Gender, Age, and BMI variables
+
+We can modify our LM equation by finetuning function arguments, most importantly fixed_effects which points to the factors studied in the analysis. Here we include all three parameters: gender, age and BMI.
+
+```{r, message= FALSE, warning= FALSE, results='hide'}
+fit_data <- Maaslin2(
+  bacteria, metadata, './../output/output_Gender_Age_BMI',
+  transform = "LOG", normalization= "NONE",
+  max_significance=0.25, min_abundance=0.000001, 
+  min_prevalence=0.4, 
+  fixed_effects = c('Gender', 'Age', 'BMI'),
+  reference = c("Gender","Female"),
+  standardize = FALSE)
+```
+
+### Visualizing results
+
+When more than one parameter is studied the results can be put out as a heatmap representing increase/decrease in the abundance of listed taxa (rows) and what parameters are statistically making the most significant contribution (columns).
+
+```{r}
+# Set the path to your png file
+image_path2 <- './../output/output_Gender_Age_BMI/heatmap.png'
+# Read the PNG image
+img2 <- readPNG(image_path2)
+# Use plot to display the image
+plot(as.raster(img2))
+```
+
+Here we see that the effect of Gender on Bacterioidota phylum remains significant, but BMI also plays high role in some taxa variablitity as indicated in BMI column of heatmap: Actinobacteriota

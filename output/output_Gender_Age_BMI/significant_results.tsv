@@ -1,0 +1,4 @@
+feature	metadata	value	coef	stderr	N	N.not.0	pval	qval
+d__Bacteria.p__Bacteroidota	Gender	Male	-1.45653388903719	0.341158554802796	50	50	9.70601841581431e-05	0.00378534718216758
+d__Bacteria.p__Actinobacteriota.c__Coriobacteriia.o__Coriobacteriales.f__Coriobacteriaceae	BMI	BMI	0.17380715484912	0.0517651542470482	50	23	0.00158586904537159	0.030924446384746
+d__Bacteria.p__Actinobacteriota	BMI	BMI	0.159800188606094	0.0573386951929596	50	38	0.00770680617249589	0.100188480242447

@@ -1,0 +1,14 @@
+feature	metadata	value	coef	stderr	N	N.not.0	pval	qval
+d__Bacteria.p__Bacteroidota	Gender	Male	-1.42195846991435	0.338530765311208	50	50	0.000114937880881775	0.00149419245146307
+d__Bacteria.p__Actinobacteriota	Gender	Male	0.712870656111922	0.685678301351341	50	38	0.30370777708229	0.789640220413955
+d__Bacteria.p__Desulfobacterota	Gender	Male	0.878961331573675	0.798515408557921	50	28	0.276497492816793	0.789640220413955
+d__Bacteria.p__Firmicutes	Gender	Male	0.355512803505901	0.30983093743306	50	50	0.25688641048537	0.789640220413955
+d__Bacteria.p__Verrucomicrobiota	Gender	Male	0.870706978890176	0.796586827629952	50	25	0.279828596336803	0.789640220413955
+d__Bacteria.p__Proteobacteria	Gender	Male	0.425866483476476	0.572236442789918	50	50	0.460374853658087	0.794437525273452
+d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Barnesiellaceae	Gender	Male	0.383906731816804	0.515831602734677	50	34	0.460354487935092	0.794437525273452
+d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Marinifilaceae	Gender	Male	0.314550133061963	0.450998986474965	50	36	0.488884630937509	0.794437525273452
+d__Bacteria.p__Actinobacteriota.c__Coriobacteriia.o__Coriobacteriales.f__Coriobacteriaceae	Gender	Male	0.223079423426731	0.633866322695883	50	23	0.726427813163778	0.800611819844286
+d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Bacteroidaceae	Gender	Male	0.138183201883089	0.381006845758583	50	50	0.718436792497403	0.800611819844286
+d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Muribaculaceae	Gender	Male	0.216429108257331	0.716658625121902	50	25	0.763958644462379	0.800611819844286
+d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Prevotellaceae	Gender	Male	0.232469904393464	0.915382891187813	50	41	0.800611819844286	0.800611819844286
+d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Rikenellaceae	Gender	Male	0.185133622827783	0.70810729981855	50	42	0.7948652330054	0.800611819844286

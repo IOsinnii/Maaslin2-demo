@@ -1,0 +1,112 @@
+---
+title: "Maaslin2 demo"
+subtitle: "metagenomics analyses" 
+title-block-banner: "#f0f3f5"
+title-block-banner-color: "black"
+author: "Ivan Osinnii"
+date: "30 April 2024"
+format: html
+code-fold: true
+editor: visual
+toc: true
+toc-location: left
+number-sections: true
+fig-cap-location: margin
+css: style.css
+---
+
+##
+
+
+## Running Code
+
+```{r}
+library(tidyverse)
+# install maaslin2
+if (!require("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+BiocManager::install("Maaslin2")
+library(Maaslin2)
+```
+
+
+
+```{r}
+bacteria <- read.table("./../input/bacteria_L6_filtered.txt", header = T, row.names = 'sample')
+metadata <- read.table("./../input/metadata.txt", header = T, row.names = 'sample')
+
+```
+
+#
+
+```{r}
+metadata_Diagnosis <- metadata  %>%  
+  tibble::rownames_to_column('sample') %>% 
+  dplyr::filter(!Diagnosis_v2 %in% c("Vd.a.NAFLD"))  %>% 
+  # dplyr::filter(!Tissue %in% c("Stool"))  %>% 
+  dplyr::filter(Tissue %in% c("Left"))  %>% 
+  tibble::column_to_rownames('sample')
+```
+
+```{r}
+# bacteria_subset <- bacteria  %>%  
+  # tibble::rownames_to_column('sample') %>% 
+  # dplyr::filter(!Diagnosis_v2 %in% c("Vd.a.NAFLD"))  %>% 
+  # dplyr::filter(!Tissue %in% c("Stool"))  %>% 
+  # dplyr::filter(Tissue %in% c("Left"))  %>% 
+  # tibble::column_to_rownames('sample')
+```
+
+```{r}
+row_names_to_keep <- row.names(metadata_Diagnosis)
+subset_bacteria <- bacteria[row_names_to_keep, ]
+input_bacteria <- subset_bacteria[1:50,1:50]
+
+
+metadata_Diagnosis <-  metadata_Diagnosis[1:50,]
+input_metadata <- select(metadata_Diagnosis, "Gender", "BMI", "Age")
+```
+
+```{r}
+
+input_bacteria <- input_bacteria %>%
+  mutate(Gender = input_metadata$Gender)
+input_bacteria$Gender
+# Assume input_bacteria is your data frame
+
+# Multiply selected columns by 0.6 for rows where Gender is "Male"
+
+# Columns to be adjusted
+cols_to_adjust <- c("d__Bacteria.p__Firmicutes")
+cols_to_adjust <- grep("Bacteria.p__Fusobacteriota", names(input_bacteria), value = TRUE)
+# Filter rows where Gender is "Male" and adjust the values
+input_bacteria[input_bacteria$Gender == "Male", 5:7] <- 
+  input_bacteria[input_bacteria$Gender == "Male", 5:7] * 0.7
+
+input_bacteria <- input_bacteria[,-51]
+
+```
+
+
+
+
+```{r}
+fit_data <- Maaslin2(
+  input_bacteria, input_metadata, 'Gender_output',
+  fixed_effects = c('Gender'),
+  reference = c("Gender","Female"),
+  standardize = FALSE)
+```
+
+```{r}
+input_bacteria <- rownames_to_column(input_bacteria, "sample")
+
+input_metadata <- rownames_to_column(input_metadata, "sample")
+
+
+write_csv(input_bacteria, "./../output/input_bacteria.csv")
+write_csv(input_metadata, "./../output/input_metadata.csv")
+
+```
+
+
