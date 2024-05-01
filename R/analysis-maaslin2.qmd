@@ -14,12 +14,23 @@ number-sections: true
 fig-cap-location: margin
 css: style.css
 ---
+::: {.callout-note collapse="true"}
+This is a Quarto document which nicely combines both R code, its results and text explanation to enable an easy and interactive access for both learners, readers and supervisors to such analyses. To learn more about Quarto see <https://quarto.org>. By default all code lines are blended, but you can show them by clicking on the code button.
+:::
+
+
 
 # Introduction
 
+
+
 ![MaAsLin2 logo from package developers website](./../assets/Maaslin.png)
 
+
+
 Maaslin2 package can be used in order to automatize linear regression analysis from metagenomics data (typically 16S rRNA gene sequencing data) and most importantly include multivariate analyses in convenient manner getting very appealing graphic results as an output. For more information please visit Maaslin2 tutorial [website](https://github.com/biobakery/biobakery/wiki/maaslin2).
+
+
 
 # Loading data and dependencies
 
@@ -36,7 +47,11 @@ Typically one needs to input files: separate microorganism abundance table (feat
 
 ```{r}
 bacteria <- read.table("./../input/input_bacteria.csv", header = T, sep = ",", row.names="sample")
+bacteria[1:6,2:3]
+
 metadata <- read.table("./../input/input_metadata.csv", header = T, sep = ",", row.names="sample")
+head(metadata)
+
 ```
 
 # Running Maaslin2 analyses
