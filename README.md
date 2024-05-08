@@ -1,8 +1,11 @@
-# Project Title
-A brief description of the project.
+# Maaslin2 package demonstration. Multifactorial linear regression analysis
+An easy way to automatize downstream 16S-rRNA or other type of microorganism sequensing data analysis yielding significant associations between patient parameters and taxa abundance
 ## Input
-Description of the input folder's contents.
+We use mock data: input_bacteria.csv - normalized bacterial abundance 
+input_metadata.csv - metadata from patients
 ## Output
-Description of the output folder's contents.
+typical Maaslin2 output format. folders contain .csv files with taxa ranking and statistics and figures for significant hits
+## Assets
+manually extracted figures for incorporation into Quatro report
 ## R
-Description of the R scripts and their purposes.
+maaslin2-analysis.qmd contains all code and comments to describe this analysis

@@ -3,3 +3,5 @@
 .RData
 .Ruserdata
 *.rds
+./input/bacteria_L6_filtered.txt
+./input/metadata.txt
