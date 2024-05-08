@@ -28,7 +28,7 @@ Maaslin2 package can be used in order to automatize linear regression analysis f
 # Motivation
 
 Consider a scenario where researchers are investigating the factors
-affecting microbiome composition among cancer patients. The dependent
+affecting microbiome composition among liver cirrhosis patients. The dependent
 variable would be the patients’ gut bacterial taxa concentrations, and
 independent variables might include age, BMI, blood sugar levels,
 physical activity, and medication type. By applying multivariate linear
@@ -40,7 +40,7 @@ interventions.
 
 # Loading data and dependencies
 
-In this analysis we need *tidyverse*, *png*, *grid* and *Maaslin2* packages.
+In this analysis we need **Maaslin2**, **tidyverse** and other minor packages.
 
 ```{r, message=F, warning=F}
 library(tidyverse)
@@ -51,11 +51,11 @@ library(knitr)
 library(DT)
 ```
 
-Typically one needs to input files: separate microorganism abundance table (feature counts) and metadata indicating all factors describing our samples and their values. In this case we have simulated mock data (made to yield some easy-to-interpret results).
+Typically one needs to input files: separate microorganism abundance table (TSS normalized feature counts) and metadata indicating all factors describing independent variables and their values. In this case we have simulated mock data (made to yield some easy-to-interpret results).
 
 ```{r}
 bacteria <- read.table("./../input/input_bacteria.csv", header = T, sep = ",", row.names="sample")
-a <- bacteria[1:6,2:3]
+a <- bacteria[1:6,7:8]
 kable(a)
 metadata <- read.table("./../input/input_metadata.csv", header = T, sep = ",", row.names="sample")
 b <- head(metadata)
@@ -67,7 +67,7 @@ kable(b)
 ## Single variable analysis of the role of the Gender
 
 
-Maaslin2 function execution makes a big output in R console, describing once more parameters of the model and very detailed calculations. You don't need to look at this output unless something unexpected happen like an error. You might want to look at the last row to understand whether there were significant findings found.
+Maaslin2 function execution makes a big output in R console, describing model parameters and specie-by-specie calculation. You don't need to look at this output unless something unexpected happen like an error. You might want to look at the last row to understand whether there were significant findings found.
 
 ```{r, message="false", warning="false"}
 fit_data <- Maaslin2(
@@ -85,7 +85,7 @@ You can see how Maaslin2 algorithm is fitting the model to each individual taxa 
 ### Visualizing results
 
 
-After the output one usually goes into ouput folder to check results in excell and pdf formats. Tables contain very detailed statistics and all result ranking whereas pdf figures like the box plot below, focus on single significant hits among microbial taxa
+After the output one usually goes into ouput folder to check results in Excel and pdf formats. Tables contain very detailed statistics and all ranking result. Pdf figures like the box plot below, focus on single significant hits among microbial taxa
 
 
 ```{r, include=FALSE}
@@ -142,3 +142,19 @@ plot(as.raster(img2))
 
 
 Here we see that the effect of Gender on Bacterioidota phylum remains significant, but BMI also plays high role in some taxa variablitity as indicated in BMI column of heatmap: Actinobacteriota
+
+<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+
+Session Information
+
+</button>
+
+::: {#collapseOne .accordion-collapse .collapse}
+<div>
+
+```{r}
+sessionInfo()
+```
+
+</div>
+:::

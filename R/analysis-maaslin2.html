@@ -180,12 +180,12 @@ Note
 </section>
 <section id="motivation" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Motivation</h1>
-<p>Consider a scenario where researchers are investigating the factors affecting microbiome composition among cancer patients. The dependent variable would be the patients’ gut bacterial taxa concentrations, and independent variables might include age, BMI, blood sugar levels, physical activity, and medication type. By applying multivariate linear regression, researchers can identify which factors are statistically significant predictors of gut microbiome, thereby aiding in targeted interventions.</p>
+<p>Consider a scenario where researchers are investigating the factors affecting microbiome composition among liver cirrhosis patients. The dependent variable would be the patients’ gut bacterial taxa concentrations, and independent variables might include age, BMI, blood sugar levels, physical activity, and medication type. By applying multivariate linear regression, researchers can identify which factors are statistically significant predictors of gut microbiome, thereby aiding in targeted interventions.</p>
 <p><img src="./../assets/Maaslin_diagram.png" class="img-fluid"></p>
 </section>
 <section id="loading-data-and-dependencies" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Loading data and dependencies</h1>
-<p>In this analysis we need <em>tidyverse</em>, <em>png</em>, <em>grid</em> and <em>Maaslin2</em> packages.</p>
+<p>In this analysis we need <strong>Maaslin2</strong>, <strong>tidyverse</strong> and other minor packages.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -197,12 +197,12 @@ Note
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Typically one needs to input files: separate microorganism abundance table (feature counts) and metadata indicating all factors describing our samples and their values. In this case we have simulated mock data (made to yield some easy-to-interpret results).</p>
+<p>Typically one needs to input files: separate microorganism abundance table (TSS normalized feature counts) and metadata indicating all factors describing independent variables and their values. In this case we have simulated mock data (made to yield some easy-to-interpret results).</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>bacteria <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"./../input/input_bacteria.csv"</span>, <span class="at">header =</span> T, <span class="at">sep =</span> <span class="st">","</span>, <span class="at">row.names=</span><span class="st">"sample"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> bacteria[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> bacteria[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,<span class="dv">7</span><span class="sc">:</span><span class="dv">8</span>]</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
@@ -210,40 +210,40 @@ Note
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
-<th style="text-align: right;">d__Bacteria.p__Acidobacteriota</th>
-<th style="text-align: right;">d__Bacteria.p__Actinobacteriota</th>
+<th style="text-align: right;">d__Bacteria.p__Campilobacterota</th>
+<th style="text-align: right;">d__Bacteria.p__Cyanobacteria</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">S1</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0.0145861</td>
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: right;">0.0021825</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">S2</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0.0009030</td>
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: right;">0.0046416</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">S3</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0.0054446</td>
+<td style="text-align: right;">0.0084038</td>
+<td style="text-align: right;">0.0000000</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">S4</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0.0045549</td>
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: right;">0.0013665</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">S5</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0.0081243</td>
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: right;">0.0009860</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">S6</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">0.0004080</td>
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: right;">0.0000000</td>
 </tr>
 </tbody>
 </table>
@@ -310,7 +310,7 @@ Note
 <h1 data-number="4"><span class="header-section-number">4</span> Running Maaslin2 analyses</h1>
 <section id="single-variable-analysis-of-the-role-of-the-gender" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="single-variable-analysis-of-the-role-of-the-gender"><span class="header-section-number">4.1</span> Single variable analysis of the role of the Gender</h2>
-<p>Maaslin2 function execution makes a big output in R console, describing once more parameters of the model and very detailed calculations. You don’t need to look at this output unless something unexpected happen like an error. You might want to look at the last row to understand whether there were significant findings found.</p>
+<p>Maaslin2 function execution makes a big output in R console, describing model parameters and specie-by-specie calculation. You don’t need to look at this output unless something unexpected happen like an error. You might want to look at the last row to understand whether there were significant findings found.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -325,57 +325,57 @@ Note
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Warning: Deleting existing log file: ./../output/output_Gender/maaslin2.log"
-2024-05-01 21:27:57.421106 INFO::Writing function arguments to log file
-2024-05-01 21:27:57.427462 INFO::Verifying options selected are valid
-2024-05-01 21:27:57.438169 INFO::Determining format of input files
-2024-05-01 21:27:57.438435 INFO::Input format is data samples as rows and metadata samples as rows
-2024-05-01 21:27:57.439382 INFO::Formula for fixed effects: expr ~  Gender
-2024-05-01 21:27:57.439793 INFO::Filter data based on min abundance and min prevalence
-2024-05-01 21:27:57.43998 INFO::Total samples in data: 50
-2024-05-01 21:27:57.44016 INFO::Min samples required with min abundance for a feature not to be filtered: 20.000000
-2024-05-01 21:27:57.440719 INFO::Total filtered features: 37
-2024-05-01 21:27:57.440951 INFO::Filtered feature names from abundance and prevalence filtering: d__Archaea.p__Euryarchaeota, d__Bacteria.p__Acidobacteriota, d__Bacteria.p__Armatimonadota, d__Bacteria.p__Bdellovibrionota, d__Bacteria.p__Campilobacterota, d__Bacteria.p__Cyanobacteria, d__Bacteria.p__Deferribacterota, d__Bacteria.p__Deinococcota, d__Bacteria.p__Elusimicrobiota, d__Bacteria.p__Fusobacteriota, d__Bacteria.p__Gemmatimonadota, d__Bacteria.p__Myxococcota, d__Bacteria.p__Patescibacteria, d__Bacteria.p__Planctomycetota, d__Bacteria.p__Spirochaetota, d__Bacteria.p__Synergistota, d__Archaea.p__Euryarchaeota.c__Methanobacteria.o__Methanobacteriales.f__Methanobacteriaceae, d__Bacteria.p__Acidobacteriota.c__Acidobacteriae.o__Acidobacteriales.f__Acidobacteriaceae_.Subgroup_1., d__Bacteria.p__Acidobacteriota.c__Acidobacteriae.o__Bryobacterales.f__Bryobacteraceae, d__Bacteria.p__Acidobacteriota.c__Blastocatellia.o__Blastocatellales.f__Blastocatellaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Actinomycetales.f__Actinomycetaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Bifidobacteriales.f__Bifidobacteriaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Corynebacteriales.f__Corynebacteriaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Corynebacteriales.f__Nocardiaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Frankiales.f__Nakamurellaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Micrococcales.f__Brevibacteriaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Micrococcales.f__Cellulomonadaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Micrococcales.f__Intrasporangiaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Micrococcales.f__Microbacteriaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Micrococcales.f__Micrococcaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Propionibacteriales.f__Propionibacteriaceae, d__Bacteria.p__Actinobacteriota.c__Coriobacteriia.o__Coriobacteriales.f__Atopobiaceae, d__Bacteria.p__Actinobacteriota.c__Coriobacteriia.o__Coriobacteriales.f__Eggerthellaceae, d__Bacteria.p__Armatimonadota.c__Fimbriimonadia.o__Fimbriimonadales.f__Fimbriimonadaceae, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Dysgonomonadaceae, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Paludibacteraceae, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Porphyromonadaceae
-2024-05-01 21:27:57.441356 INFO::Total filtered features with variance filtering: 0
-2024-05-01 21:27:57.441593 INFO::Filtered feature names from variance filtering:
-2024-05-01 21:27:57.441762 INFO::Running selected normalization method: NONE
-2024-05-01 21:27:57.441947 INFO::Bypass z-score application to metadata
-2024-05-01 21:27:57.442119 INFO::Running selected transform method: LOG
-2024-05-01 21:27:57.442439 INFO::Running selected analysis method: LM
-2024-05-01 21:27:57.448283 INFO::Fitting model to feature number 1, d__Bacteria.p__Actinobacteriota
-2024-05-01 21:27:57.451483 INFO::Fitting model to feature number 2, d__Bacteria.p__Bacteroidota
-2024-05-01 21:27:57.452304 INFO::Fitting model to feature number 3, d__Bacteria.p__Desulfobacterota
-2024-05-01 21:27:57.453014 INFO::Fitting model to feature number 4, d__Bacteria.p__Firmicutes
-2024-05-01 21:27:57.45372 INFO::Fitting model to feature number 5, d__Bacteria.p__Proteobacteria
-2024-05-01 21:27:57.45438 INFO::Fitting model to feature number 6, d__Bacteria.p__Verrucomicrobiota
-2024-05-01 21:27:57.455033 INFO::Fitting model to feature number 7, d__Bacteria.p__Actinobacteriota.c__Coriobacteriia.o__Coriobacteriales.f__Coriobacteriaceae
-2024-05-01 21:27:57.455735 INFO::Fitting model to feature number 8, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Bacteroidaceae
-2024-05-01 21:27:57.456383 INFO::Fitting model to feature number 9, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Barnesiellaceae
-2024-05-01 21:27:57.457048 INFO::Fitting model to feature number 10, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Marinifilaceae
-2024-05-01 21:27:57.457698 INFO::Fitting model to feature number 11, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Muribaculaceae
-2024-05-01 21:27:57.458374 INFO::Fitting model to feature number 12, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Prevotellaceae
-2024-05-01 21:27:57.45902 INFO::Fitting model to feature number 13, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Rikenellaceae
-2024-05-01 21:27:57.462709 INFO::Counting total values for each feature
-2024-05-01 21:27:57.463279 INFO::Writing filtered data to file ./../output/output_Gender/features/filtered_data.tsv
-2024-05-01 21:27:57.464175 INFO::Writing filtered, normalized data to file ./../output/output_Gender/features/filtered_data_norm.tsv
-2024-05-01 21:27:57.464816 INFO::Writing filtered, normalized, transformed data to file ./../output/output_Gender/features/filtered_data_norm_transformed.tsv
-2024-05-01 21:27:57.465564 WARNING::Deleting existing residuals file: ./../output/output_Gender/fits/residuals.rds
-2024-05-01 21:27:57.466049 INFO::Writing residuals to file ./../output/output_Gender/fits/residuals.rds
-2024-05-01 21:27:57.466467 WARNING::Deleting existing fitted file: ./../output/output_Gender/fits/fitted.rds
-2024-05-01 21:27:57.466721 INFO::Writing fitted values to file ./../output/output_Gender/fits/fitted.rds
-2024-05-01 21:27:57.467107 INFO::Writing all results to file (ordered by increasing q-values): ./../output/output_Gender/all_results.tsv
-2024-05-01 21:27:57.467555 INFO::Writing the significant results (those which are less than or equal to the threshold of 0.250000 ) to file (ordered by increasing q-values): ./../output/output_Gender/significant_results.tsv
-2024-05-01 21:27:57.467843 INFO::Writing heatmap of significant results to file: ./../output/output_Gender/heatmap.pdf
+2024-05-08 12:50:05.915512 INFO::Writing function arguments to log file
+2024-05-08 12:50:05.922926 INFO::Verifying options selected are valid
+2024-05-08 12:50:05.934654 INFO::Determining format of input files
+2024-05-08 12:50:05.934969 INFO::Input format is data samples as rows and metadata samples as rows
+2024-05-08 12:50:05.938624 INFO::Formula for fixed effects: expr ~  Gender
+2024-05-08 12:50:05.939002 INFO::Filter data based on min abundance and min prevalence
+2024-05-08 12:50:05.939172 INFO::Total samples in data: 50
+2024-05-08 12:50:05.939344 INFO::Min samples required with min abundance for a feature not to be filtered: 20.000000
+2024-05-08 12:50:05.939869 INFO::Total filtered features: 37
+2024-05-08 12:50:05.940073 INFO::Filtered feature names from abundance and prevalence filtering: d__Archaea.p__Euryarchaeota, d__Bacteria.p__Acidobacteriota, d__Bacteria.p__Armatimonadota, d__Bacteria.p__Bdellovibrionota, d__Bacteria.p__Campilobacterota, d__Bacteria.p__Cyanobacteria, d__Bacteria.p__Deferribacterota, d__Bacteria.p__Deinococcota, d__Bacteria.p__Elusimicrobiota, d__Bacteria.p__Fusobacteriota, d__Bacteria.p__Gemmatimonadota, d__Bacteria.p__Myxococcota, d__Bacteria.p__Patescibacteria, d__Bacteria.p__Planctomycetota, d__Bacteria.p__Spirochaetota, d__Bacteria.p__Synergistota, d__Archaea.p__Euryarchaeota.c__Methanobacteria.o__Methanobacteriales.f__Methanobacteriaceae, d__Bacteria.p__Acidobacteriota.c__Acidobacteriae.o__Acidobacteriales.f__Acidobacteriaceae_.Subgroup_1., d__Bacteria.p__Acidobacteriota.c__Acidobacteriae.o__Bryobacterales.f__Bryobacteraceae, d__Bacteria.p__Acidobacteriota.c__Blastocatellia.o__Blastocatellales.f__Blastocatellaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Actinomycetales.f__Actinomycetaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Bifidobacteriales.f__Bifidobacteriaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Corynebacteriales.f__Corynebacteriaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Corynebacteriales.f__Nocardiaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Frankiales.f__Nakamurellaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Micrococcales.f__Brevibacteriaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Micrococcales.f__Cellulomonadaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Micrococcales.f__Intrasporangiaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Micrococcales.f__Microbacteriaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Micrococcales.f__Micrococcaceae, d__Bacteria.p__Actinobacteriota.c__Actinobacteria.o__Propionibacteriales.f__Propionibacteriaceae, d__Bacteria.p__Actinobacteriota.c__Coriobacteriia.o__Coriobacteriales.f__Atopobiaceae, d__Bacteria.p__Actinobacteriota.c__Coriobacteriia.o__Coriobacteriales.f__Eggerthellaceae, d__Bacteria.p__Armatimonadota.c__Fimbriimonadia.o__Fimbriimonadales.f__Fimbriimonadaceae, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Dysgonomonadaceae, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Paludibacteraceae, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Porphyromonadaceae
+2024-05-08 12:50:05.940434 INFO::Total filtered features with variance filtering: 0
+2024-05-08 12:50:05.940629 INFO::Filtered feature names from variance filtering:
+2024-05-08 12:50:05.940788 INFO::Running selected normalization method: NONE
+2024-05-08 12:50:05.940958 INFO::Bypass z-score application to metadata
+2024-05-08 12:50:05.941107 INFO::Running selected transform method: LOG
+2024-05-08 12:50:05.941396 INFO::Running selected analysis method: LM
+2024-05-08 12:50:05.944689 INFO::Fitting model to feature number 1, d__Bacteria.p__Actinobacteriota
+2024-05-08 12:50:05.947787 INFO::Fitting model to feature number 2, d__Bacteria.p__Bacteroidota
+2024-05-08 12:50:05.948549 INFO::Fitting model to feature number 3, d__Bacteria.p__Desulfobacterota
+2024-05-08 12:50:05.9492 INFO::Fitting model to feature number 4, d__Bacteria.p__Firmicutes
+2024-05-08 12:50:05.949835 INFO::Fitting model to feature number 5, d__Bacteria.p__Proteobacteria
+2024-05-08 12:50:05.950471 INFO::Fitting model to feature number 6, d__Bacteria.p__Verrucomicrobiota
+2024-05-08 12:50:05.951085 INFO::Fitting model to feature number 7, d__Bacteria.p__Actinobacteriota.c__Coriobacteriia.o__Coriobacteriales.f__Coriobacteriaceae
+2024-05-08 12:50:05.951741 INFO::Fitting model to feature number 8, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Bacteroidaceae
+2024-05-08 12:50:05.952368 INFO::Fitting model to feature number 9, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Barnesiellaceae
+2024-05-08 12:50:05.953005 INFO::Fitting model to feature number 10, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Marinifilaceae
+2024-05-08 12:50:05.953633 INFO::Fitting model to feature number 11, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Muribaculaceae
+2024-05-08 12:50:05.954273 INFO::Fitting model to feature number 12, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Prevotellaceae
+2024-05-08 12:50:05.954902 INFO::Fitting model to feature number 13, d__Bacteria.p__Bacteroidota.c__Bacteroidia.o__Bacteroidales.f__Rikenellaceae
+2024-05-08 12:50:05.958463 INFO::Counting total values for each feature
+2024-05-08 12:50:05.958993 INFO::Writing filtered data to file ./../output/output_Gender/features/filtered_data.tsv
+2024-05-08 12:50:05.960218 INFO::Writing filtered, normalized data to file ./../output/output_Gender/features/filtered_data_norm.tsv
+2024-05-08 12:50:05.96084 INFO::Writing filtered, normalized, transformed data to file ./../output/output_Gender/features/filtered_data_norm_transformed.tsv
+2024-05-08 12:50:05.961978 WARNING::Deleting existing residuals file: ./../output/output_Gender/fits/residuals.rds
+2024-05-08 12:50:05.962456 INFO::Writing residuals to file ./../output/output_Gender/fits/residuals.rds
+2024-05-08 12:50:05.962873 WARNING::Deleting existing fitted file: ./../output/output_Gender/fits/fitted.rds
+2024-05-08 12:50:05.963129 INFO::Writing fitted values to file ./../output/output_Gender/fits/fitted.rds
+2024-05-08 12:50:05.96344 INFO::Writing all results to file (ordered by increasing q-values): ./../output/output_Gender/all_results.tsv
+2024-05-08 12:50:05.963884 INFO::Writing the significant results (those which are less than or equal to the threshold of 0.250000 ) to file (ordered by increasing q-values): ./../output/output_Gender/significant_results.tsv
+2024-05-08 12:50:05.964161 INFO::Writing heatmap of significant results to file: ./../output/output_Gender/heatmap.pdf
 [1] "There are no associations to plot!"
-2024-05-01 21:27:57.468393 INFO::Writing association plots (one for each significant association) to output folder: ./../output/output_Gender
-2024-05-01 21:27:57.469024 INFO::Plotting associations from most to least significant, grouped by metadata
-2024-05-01 21:27:57.46923 INFO::Plotting data for metadata number 1, Gender
-2024-05-01 21:27:57.483641 INFO::Creating boxplot for categorical data, Gender vs d__Bacteria.p__Bacteroidota</code></pre>
+2024-05-08 12:50:05.964742 INFO::Writing association plots (one for each significant association) to output folder: ./../output/output_Gender
+2024-05-08 12:50:05.965394 INFO::Plotting associations from most to least significant, grouped by metadata
+2024-05-08 12:50:05.965586 INFO::Plotting data for metadata number 1, Gender
+2024-05-08 12:50:05.979645 INFO::Creating boxplot for categorical data, Gender vs d__Bacteria.p__Bacteroidota</code></pre>
 </div>
 </div>
 <p>You can see how Maaslin2 algorithm is fitting the model to each individual taxa represented in rows.</p>
 <section id="visualizing-results" class="level3" data-number="4.1.1">
 <h3 data-number="4.1.1" class="anchored" data-anchor-id="visualizing-results"><span class="header-section-number">4.1.1</span> Visualizing results</h3>
-<p>After the output one usually goes into ouput folder to check results in excell and pdf formats. Tables contain very detailed statistics and all result ranking whereas pdf figures like the box plot below, focus on single significant hits among microbial taxa</p>
+<p>After the output one usually goes into ouput folder to check results in Excel and pdf formats. Tables contain very detailed statistics and all ranking result. Pdf figures like the box plot below, focus on single significant hits among microbial taxa</p>
 <p><img src="./../assets/Gender.png" class="img-fluid"></p>
 <p>We can see here that Bacrterioidota phylum turned out to be very reduced in Male group compared to Female</p>
 </section>
@@ -402,6 +402,60 @@ Note
 <p>When more than one parameter is studied the results can be put out as a heatmap representing increase/decrease in the abundance of listed taxa (rows) and what parameters are statistically making the most significant contribution (columns).</p>
 <p><img src="./../assets/BMI.png" class="img-fluid"></p>
 <p>Here we see that the effect of Gender on Bacterioidota phylum remains significant, but BMI also plays high role in some taxa variablitity as indicated in BMI column of heatmap: Actinobacteriota</p>
+<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+<p>Session Information</p>
+</button>
+<div id="collapseOne" class="accordion-collapse collapse">
+<div>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.3.3 (2024-02-29)
+Platform: aarch64-apple-darwin20 (64-bit)
+Running under: macOS Sonoma 14.3
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: Europe/Zurich
+tzcode source: internal
+
+attached base packages:
+[1] grid      stats     graphics  grDevices utils     datasets  methods  
+[8] base     
+
+other attached packages:
+ [1] DT_0.33         knitr_1.45      png_0.1-8       Maaslin2_1.16.0
+ [5] lubridate_1.9.3 forcats_1.0.0   stringr_1.5.1   dplyr_1.1.4    
+ [9] purrr_1.0.2     readr_2.1.5     tidyr_1.3.1     tibble_3.2.1   
+[13] ggplot2_3.5.0   tidyverse_2.0.0
+
+loaded via a namespace (and not attached):
+ [1] gtable_0.3.4       biglm_0.9-2.1      xfun_0.43          htmlwidgets_1.6.4 
+ [5] lattice_0.22-6     tzdb_0.4.0         vctrs_0.6.5        tools_4.3.3       
+ [9] generics_0.1.3     parallel_4.3.3     getopt_1.20.4      fansi_1.0.6       
+[13] DEoptimR_1.1-3     pkgconfig_2.0.3    logging_0.10-108   Matrix_1.6-5      
+[17] pheatmap_1.0.12    RColorBrewer_1.1-3 lifecycle_1.0.4    compiler_4.3.3    
+[21] farver_2.1.1       munsell_0.5.1      htmltools_0.5.8.1  hash_2.2.6.3      
+[25] yaml_2.3.8         pillar_1.9.0       crayon_1.5.2       nlme_3.1-164      
+[29] robustbase_0.99-2  tidyselect_1.2.1   digest_0.6.35      mvtnorm_1.2-4     
+[33] stringi_1.8.3      labeling_0.4.3     splines_4.3.3      pcaPP_2.0-4       
+[37] fastmap_1.1.1      colorspace_2.1-0   cli_3.6.2          magrittr_2.0.3    
+[41] utf8_1.2.4         withr_3.0.0        scales_1.3.0       timechange_0.3.0  
+[45] rmarkdown_2.26     hms_1.1.3          pbapply_1.7-2      evaluate_0.23     
+[49] mgcv_1.9-1         rlang_1.1.3        glue_1.7.0         optparse_1.7.5    
+[53] DBI_1.2.2          rstudioapi_0.16.0  jsonlite_1.8.8     R6_2.5.1          </code></pre>
+</div>
+</div>
+</div>
+</div>
 </section>
 </section>
 </section>
