@@ -1,5 +1,5 @@
 # Maaslin2 package demonstration. Multifactorial linear regression analysis
-An easy way to automatize downstream 16S-rRNA or other type of microorganism sequensing data analysis yielding significant associations between patient parameters and taxa abundance
+An easy way to automatize downstream 16S-rRNA or other type of microorganism sequensing data analysis yielding significant associations between patient parameters and taxa abundance <br>
 https://iosinnii.github.io/Maaslin2-demo/R/analysis-maaslin2.html - this report demonstrates how to use the package based on a mock data 
 ## Input
 We use mock data: input_bacteria.csv - normalized bacterial abundance 
